@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>maareval index</title>
+<style>
+.word { 
+  	background-color: #55f291;
+	font-family: Arial;
+  	font-size: 48px;
+  	color: black;
+  	line-height: 1.4em;
+  	height: 1.4em;
+  	padding: 0 14px 0 7px;
+  	display: inline-block;
+  	vertical-align: middle;
+  	position: relative;
+}
+
+.word:before {
+ 	 content: '';
+  	background-color: black;
+  	width: 1px;
+  	position: absolute;
+  	top: 5px;
+  	bottom: 5px;
+  	right: 7px;
+}
+</style>
+</head>
+<body>
+<span class="word" id="word"></span>
+
+<script>
+var words = ['up', 'to', 'you'],
+    wordWrapper = document.getElementById('word'),
+    wordWrapperContent = wordWrapper.innerHTML,
+    addingWord = false,
+    counter = 1;
+
+setInterval(function(){
+
+  if(wordWrapperContent.length > 0 && !addingWord ) {
+    wordWrapper.innerHTML = wordWrapperContent.slice(0, -1);
+    wordWrapperContent = wordWrapper.innerHTML;
+  } else {
+    addingWord = true;
+  }
+
+  if( addingWord ){
+    if( wordWrapperContent.length < words[counter].length  ) {
+      wordWrapper.innerHTML = words[counter].slice(0, wordWrapperContent.length + 1);
+      wordWrapperContent = wordWrapper.innerHTML;
+    } else {
+      if( counter < words.length) {
+        counter ++
+      }
+      addingWord = false;
+    }
+  }
+
+  if( counter == words.length) {
+    counter = 0;
+  }
+
+}, 150);
+</script>
+</body>
+</html>
